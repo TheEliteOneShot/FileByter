@@ -12,4 +12,4 @@ This includes two small PowerShell scripts that enable the serializing and subse
 6. Either manually type or copy the file_reader.ps1 script to the same location as the file from step #5. 
 7. Open file_reader.ps1 and edit the $OutputFile variable to be the original file name from step #1.
 8. Run file_reader.ps1
-9. Use the file
+9. Use the file that is created.
