@@ -1,7 +1,7 @@
 ( *< Byte Byte Byte
 
 # Description
-Two small PowerShell scripts that enable the serializing and subsequent deserializing of any file. This enables you to send any file as a .txt extension.
+Two small PowerShell scripts that enable the serializing and subsequent deserializing of any file. This enables you to send any file like a .exe or a .zip as regular text.
 
 # Instructions
 1. Choose any file
