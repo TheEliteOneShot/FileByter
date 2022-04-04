@@ -1,6 +1,3 @@
-# Best solution for sending files as text
-The best way to send files is now called the [FileByster](https://github.com/TheEliteOneShot/FileByter).
-
 # Description
 Two small PowerShell scripts that enable the serializing and subsequent deserializing of any file. This enables you to send any file as a .txt extension.
 
