@@ -5,10 +5,10 @@
 $InputFile = "./out.ps1"
 
 # The size of the byte chunks that should be outputted
-$ChunkSizeInMegabytes = 1
+$ChunkSizeInMegabytes = 199
 
 # Out folder location
-$outFolderLocation = "./out/"
+$outFolderPath = "./out/"
 
 # Output Byte File Extension
 $outFileExtension = ".txt"
@@ -21,11 +21,17 @@ $ClearOutFolder = 1
 
 $byteLines = [string[]][System.IO.File]::ReadAllBytes($InputFile)
 
+If(!(test-path $outFolderPath))
+{
+      New-Item -ItemType Directory -Force -Path $outFolderPath
+}
+
+
 $MB_SIZE = (1024 * 1024)
 
 if ($byteLines -lt $MB_SIZE) {
     Write-Host Input file size is $byteLines.Length bytes and is smaller than $MB_SIZE bytes so it will not be chunked.
-    [IO.File]::WriteAllLines($outFolderLocation + "0" + $outFileExtension, $byteLines)
+    [IO.File]::WriteAllLines($outFolderPath + "0" + $outFileExtension, $byteLines)
     exit
 }
 
@@ -35,7 +41,7 @@ $totalChunks = [Math]::Ceiling($byteLines.Length / $chunkSizeMegaByte)
 
 Write-Host Now generating $totalChunks chunks that are $ChunkSizeInMegabytes mb in size
 
-if ($ClearOutFolder) { Remove-Item $outFolderLocation* -Force }
+if ($ClearOutFolder) { Remove-Item $outFolderPath* -Force }
 
 for($i=0;$i -lt $totalChunks;$i++) {
     $startChunk = 0
