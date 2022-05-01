@@ -13,7 +13,7 @@ $outFolderPath = "./out/"
 # Output Byte File Extension
 $outFileExtension = ".txt"
 
-# Clear the output folder before writing the byte chunk files
+# Clear the output folder before writing the byte chunk files (1 for True, 0 for False)
 $ClearOutFolder = 1
 
 
