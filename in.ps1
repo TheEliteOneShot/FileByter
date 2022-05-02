@@ -2,10 +2,10 @@
 ###################################
 
 # The file name to create from the byte chunk files
-$OutputFile = "./tst.ps1"
+$OutputFile = "./tst.zip"
 
 # The path to the in folder where the byte chunk files will be read
-$InFolderPath = "./in"
+$InFolderPath = "./in/"
 
 # The file extension to the byte file chunks
 $InFileExtension = ".txt"
@@ -17,7 +17,11 @@ If(!(test-path $InFolderPath))
       New-Item -ItemType Directory -Force -Path $InFolderPath
 }
 
-$InFileCount = [System.IO.Directory]::GetFiles("$InFolderPath", "$InFileExtension").Count
+$result = [System.IO.Directory]::GetFiles($InFolderPath, $InFileExtension)
+
+Write-Host $result
+
+$InFileCount = [System.IO.Directory]::GetFiles($InFolderPath).Count
 
 if($InFileCount -eq 0) 
 {
@@ -25,12 +29,14 @@ if($InFileCount -eq 0)
     exit
 }
 
-$chunks = New-Object System.Collections.ArrayList
-
-for($i=0;$i -lt $InFileCount;$i++) {
-    $fileName = $InFolderPath + $i.toString() + ".txt"
-    $byteLines = [System.IO.File]::ReadAllLines($fileName)
-    $chunks.AddRange($byteLines)
+try { 
+    $ostream = [System.Io.File]::OpenWrite($OutputFile)
+    for($i=0;$i -lt $InFileCount;$i++) {
+        $fileName = $InFolderPath + $i.toString() + ".txt"
+        $byteLines = [byte[]][System.IO.File]::ReadAllLines($fileName)
+        $ostream.Write($byteLines, 0, $byteLines.Count)
+    }
 }
+finally { $ostream.close(); }
 
-[System.IO.File]::WriteAllBytes($OutputFile, [byte[]]$chunks)
+
