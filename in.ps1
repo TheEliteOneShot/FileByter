@@ -2,7 +2,7 @@
 ###################################
 
 # The file name to create from the byte chunk files
-$OutputFile = "./tst.zip"
+$OutputFile = "./output.zip"
 
 # The path to the in folder where the byte chunk files will be read
 $InFolderPath = "./in/"
@@ -34,6 +34,7 @@ try {
     for($i=0;$i -lt $InFileCount;$i++) {
         $fileName = $InFolderPath + $i.toString() + ".txt"
         $byteLines = [byte[]][System.IO.File]::ReadAllLines($fileName)
+        Write-Host Now writing the bytes of file number $i
         $ostream.Write($byteLines, 0, $byteLines.Count)
     }
 }

@@ -2,7 +2,7 @@
 #############################
 
 # The file to serialize into byte chunk files
-$InputFile = "./template.zip"
+$InputFile = "./input.zip"
 
 # The size of the input file chunk that will be converted to byte string files
 # The string byte chunk output file size cannot exceed 65,536 bytes (number of elements) * (size of each element in bytes
