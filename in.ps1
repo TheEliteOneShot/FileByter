@@ -2,7 +2,7 @@
 ###################################
 
 # The file name to create from the byte chunk files
-$OutputFile = "./output.zip"
+$OutputFile = "./test.zip"
 
 # The path to the in folder where the byte chunk files will be read
 $InFolderPath = "./in/"

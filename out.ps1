@@ -2,7 +2,7 @@
 #############################
 
 # The file to serialize into byte chunk files
-$InputFile = "./input.zip"
+$InputFile = "./quickstart.zip"
 
 # The size of the input file chunk that will be converted to byte string files
 # The string byte chunk output file size cannot exceed 65,536 bytes -- (number of elements) * (size of each element in bytes)
@@ -33,8 +33,8 @@ If(!(test-path $outFolderPath))
 
 $MB_SIZE = (1024 * 1024)
 
-if ($byteLines.Length -lt $MB_SIZE) {
-    Write-Host Input file size is $byteLines.Length bytes and is smaller than $MB_SIZE bytes so it will not be chunked.
+if (($byteLines.Length / $MB_SIZE) -lt $ChunkSizeInMegabytes) {
+    Write-Host Input file size is ($byteLines.Length / $MB_SIZE) megabytes and is smaller than $ChunkSizeInMegabytes megabytes so it will not be chunked.
     [IO.File]::WriteAllLines($outFolderPath + "0" + $outFileExtension, $byteLines)
     exit
 }
@@ -58,12 +58,12 @@ for($i=0;$i -lt $totalChunks;$i++) {
     }
     elseif ($i -ge 1 -and $i -lt ($totalChunks-1)) 
     {
-        $startChunk = $chunkSizeMegaByte*$i
+        $startChunk = $chunkSizeMegaByte*$i+1
         $endChunk = $chunkSizeMegaByte*($i+1)
     }
     elseif ($i -eq ($totalChunks-1))
     {
-        $startChunk = $chunkSizeMegaByte*$i
+        $startChunk = $chunkSizeMegaByte*$i+1
         $endChunk = $byteLines.Length
     }
     Write-Host Start Chunk: [ $startChunk bytes] - End Chunk: [ $endChunk bytes]
