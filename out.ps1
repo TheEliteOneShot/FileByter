@@ -7,7 +7,7 @@ $InputFile = "./quickstart.zip"
 # The size of the input file chunk that will be converted to byte string files
 # The string byte chunk output file size cannot exceed 65,536 bytes -- (number of elements) * (size of each element in bytes)
 # The size of the output file chunks can be up to three times as much as the original file and are random 
-# You will need to try different different numbers here to see if it meets the target output size threshold
+# You will need to try different numbers here to see if it meets the target output size threshold
 $ChunkSizeInMegabytes = 40
 
 # Out folder location
